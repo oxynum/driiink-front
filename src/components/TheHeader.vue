@@ -5,10 +5,6 @@
       <span></span>
       <span></span>
     </div>
-    <div class="title">
-      <img src="../assets/chicken.png" alt="logo chicken">
-      <p class="title-txt">Driiink.</p>
-    </div>
     <div class="cart">
       <font-awesome-icon icon="cart-shopping" />
     </div>
@@ -26,8 +22,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 354px;
-    margin: 79px auto 0 auto;
+    width: 90%;
+    height: 60px;
+    margin: 0 auto;
   }
 
   .burger-logo{
@@ -46,19 +43,6 @@ export default {
 
   .burger-logo > span:nth-child(2){
     width: 13px;
-  }
-
-  .title{
-    width: 99px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .title-txt{
-    font-family: 'Nunito', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
   }
 
   .cart{
