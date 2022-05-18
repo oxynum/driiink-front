@@ -2,8 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
 
 const routes = [
+  //{
+  //  path: '/bar/:id',
+  //  name: 'home',
+  //  component: HomeView
+  //},
   {
-    path: '/bar/:id',
+    path: '/',
     name: 'home',
     component: HomeView
   },

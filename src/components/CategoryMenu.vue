@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="(category, index) in categories" :key="index"><a href="#">{{ category }}</a></li>
+    <li v-for="category in categories" :key="category.index"><a :href="category.slug">{{ category.name }}</a></li>
   </ul>
 </template>
 
@@ -30,6 +30,7 @@ export default {
 
   li{
     margin: 45px 5px 20px 5px;
+    font-family: Nunito, serif;
   }
 
   a{
