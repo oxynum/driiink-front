@@ -1,15 +1,14 @@
 <template>
   <div class="barbrand">
-    <img class="bar-img" :src="bar_img_src" alt="coktail">
-    <h3>{{ title }}</h3>
-    <span><font-awesome-icon id="loc_dot" icon="location-dot" /><span class="loc-bar">3 rue de Colombe - Asnières sur seine</span></span>
+    <h3>{{ name }}</h3>
+    <span><font-awesome-icon id="loc_dot" icon="location-dot" /><span class="loc-bar">{{ address }}</span></span>
   </div>
 </template>
 
 <script>
 export default {
   name: "BarBrand",
-  props: ['title', 'bar_img_src']
+  props: ['name', 'address']
 }
 </script>
 
@@ -21,11 +20,6 @@ export default {
     align-items: center;
   }
 
-  .bar-img{
-    object-fit: cover;
-    width: 100%;
-    height: 100px;
-  }
 
   h3{
     margin: 20px 0 13px 0;
@@ -37,6 +31,8 @@ export default {
   span {
     color: #979797;
     display: inline;
+    width: 100%;
+    text-align: center;
   }
 
   .loc-bar {

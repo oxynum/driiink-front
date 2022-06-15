@@ -4,11 +4,12 @@
       <div class="card-container">
         <div v-for="promotion in promotions" class="single-card" :key="promotion.index">
           <div class="card-text">
-            <h3>{{ promotion.name }}</h3>
-            <p>{{ promotion.description }}</p>
-            <span>Commander</span>
+            <h3>Valentine Day ❤️</h3>
+            <span>plus que 1 heure 🕢</span>
           </div>
-          <img :src="promotion.img" alt="cocktail">
+          <h2>-50% sur le 2ème</h2>
+          <p>*voir les conditions</p>
+        <button class="btn">👀</button>
         </div>
       </div>
     </div>
@@ -51,52 +52,60 @@ export default {
     width: 275px;
     flex: none;
     height: 120px;
-    background-color: #20B25D;
-    margin: 10px 20px;
+    background-color: #d7d7d7;
+    margin: 10px 8px;
     border-radius: 20px;
     position: relative;
-
   }
 
+  .single-card:nth-child(1){
+    margin-left: 0;
+  }
 
   .card-text{
     display: flex;
-    flex-direction: column;
-    color: white;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
     font-family: Nunito, serif;
-    margin: 16px 0 0 27px;
+    margin: 16px 0 0 10px;
   }
 
   .card-text > h3{
     font-weight: 600;
-    margin-bottom: 7px;
   }
-
-  .card-text > p {
-    white-space: pre-line;
-    width: 207px;
-    text-align: center;
-    font-size: 14px;
-  }
-
   .card-text > span{
-    margin-top: 15px;
-    position: relative;
+    color: #b1b1b1;
+    font-size: 10px;
+    margin-right: 7px;
   }
 
-  .card-text > span::before{
-    content: ">";
-    position: absolute;
-    left: -10px;
+  h2{
+    font-size: 24px;
+    font-family: Nunito, serif;
+    font-weight: bold;
+    margin: 8px 0 0 10px;
   }
 
-  img{
+  p{
+    color: #b1b1b1;
+    font-size: 10px;
+    font-family: Nunito, serif;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+
+  .btn{
     position: absolute;
-    top: -20px;
-    right: -30px;
-    z-index: 1;
-    height: 132px;
-    object-fit: contain;
+    right: 0;
+    bottom: 0;
+    border: none;
+    background-color: #21B05C;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 10px;
+    width: 36px;
+    height: 30px;
+    font-size: 20px;
   }
 
 </style>

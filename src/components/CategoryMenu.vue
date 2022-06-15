@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="category in categories" :key="category.index"><a :href="category.slug">{{ category.name }}</a></li>
+    <li v-for="category in categories" :key="category.index"><a href="#">{{ category }}</a></li>
   </ul>
 </template>
 
@@ -37,14 +37,9 @@ export default {
     padding: 6px 22px;
     border-radius: 50px;
     border: none;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
     color: black;
+    background-color: #d7d7d7;
     text-decoration: none;
   }
 
-  .active{
-    background-color: black;
-    color: white;
-    box-shadow: none;
-  }
 </style>
