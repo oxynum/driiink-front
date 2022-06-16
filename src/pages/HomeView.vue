@@ -73,7 +73,6 @@ export default {
     this.categories = await parseCategories(menu.products)
 
     this.products = await driiink_api_response_parser(this.categories, menu.products)
-    console.log(this.products)
   },
   
 }

@@ -49,25 +49,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
   }
 
-  .cart::before{
-    content: '3';
-    color: white;
-    display: flex;
-    justify-content: center;
-    font-family: 'Lato',serif;
-    font-weight: 700;
-    font-size: 9px;
-    align-items: center;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: #21B05C;
-    position: absolute;
-    top: -5px;
-    left: -5px;
-  }
 
 </style>

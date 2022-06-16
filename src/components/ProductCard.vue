@@ -8,7 +8,7 @@
                 <h4>{{ productInfo.name }}</h4>
                 <p>{{ productInfo.description }}</p>
                 <div class="card-text-price">
-                    <span>12.00€</span>
+                    <span>{{ priceFormatter(productInfo.price) }}</span>
                     <button>+</button>
                 </div>
             </div>
@@ -22,6 +22,11 @@ export default {
   name: "ProductCard",
   props: {
     productInfo: Object,
+  },
+  methods: {
+      priceFormatter: function(price) {
+          return (price/100).toFixed(2) + " €"
+      }
   }
 }
 
