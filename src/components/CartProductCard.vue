@@ -56,7 +56,7 @@ export default{
       },
       removeAllFromCart(){
         console.log("REMOVING ALL")
-        console.log(this.cart.filter(p => p.id !== this.product.id))
+        this.counter = 0
         this.cart.filter(p => p.id !== this.product.id)
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
       }  
