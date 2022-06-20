@@ -18,8 +18,17 @@ export default {
   },
   data() {
       return {
-          counter: (JSON.parse(sessionStorage.getItem('cart')).filter(product => product.id === this.product.id)).length,
-          cart: JSON.parse(sessionStorage.getItem('cart')),
+          counter: 0,
+          cart: [],
+      }
+  },
+  async beforeMount(){
+      if((JSON.parse(sessionStorage.getItem('cart')).filter(product => product.id === this.product.id)).length > 0){
+          this.counter = (JSON.parse(sessionStorage.getItem('cart')).filter(product => product.id === this.product.id)).length
+      }
+      
+      if(JSON.parse(sessionStorage.getItem('cart'))){
+          this.cart = JSON.parse(sessionStorage.getItem('cart'))
       }
   },
   methods: {
@@ -30,13 +39,11 @@ export default {
         this.cart.push(this.product) 
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
         this.counter++
-        console.log(this.cart)
       },
       removeFromCart: function(){
           this.cart = this.removeOneItem(this.product)
           sessionStorage.setItem('cart', JSON.stringify(this.cart))
           this.counter--
-          console.log(this.cart)
       },
       removeOneItem(value){
         for(let i = this.cart.length - 1; i >= 0; i--){

@@ -27,7 +27,7 @@ export default {
       priceFormatter: function(price) {
           return (price/100).toFixed(2) + " €"
       }
-  }
+  },
 }
 
 </script>

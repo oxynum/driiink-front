@@ -6,15 +6,21 @@
       <span></span>
     </div>
     <div class="cart">
-      <font-awesome-icon icon="cart-shopping" />
+      <router-link :to="{ name: 'Cart', params: { id: this.id} }"><font-awesome-icon icon="cart-shopping" /></router-link> 
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'HeaderComponent'
+  name: 'HeaderComponent',
+  data() {
+    return {
+      id: this.$route.params.id 
+    }
+  }
 }
+
 </script>
 
 <style>
@@ -51,5 +57,7 @@ export default {
     align-items: center;
   }
 
-
+  a{
+    color: black;
+  }
 </style>
