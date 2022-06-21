@@ -25,6 +25,11 @@ export default {
     this.cart.forEach(el => {
         this.time = this.time + parseInt(el.prepTime.slice(el.prepTime.indexOf(':') + 1, el.prepTime.lastIndexOf('+')).replace(':00', ''))
     });
+  },
+  mounted(){
+    window.addEventListener('storage', () => {
+        console.log("oui")
+    })
   }
 }
 </script>

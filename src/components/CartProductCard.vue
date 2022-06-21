@@ -29,7 +29,8 @@ export default{
     data() {
         return {
             cart: [],
-            counter: this.quantity
+            counter: this.quantity,
+            totalPrice: 0
         }
     },
     methods: {
@@ -55,17 +56,15 @@ export default{
         }
       },
       removeAllFromCart(){
-        console.log("REMOVING ALL")
         this.counter = 0
-        this.cart.filter(p => p.id !== this.product.id)
+        this.cart = this.cart.filter(p => p.id !== this.product.id)
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
-      }  
+      },
     },
     async beforeMount() {
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
-        console.log(this.cart)
     }
 }
 </script>
