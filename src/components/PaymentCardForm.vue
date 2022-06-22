@@ -55,7 +55,6 @@ export default{
     },
     async mounted(){
         this.paymentIntent = JSON.parse(await createPaymentIntent(parseInt((this.totalPrice*100).toFixed(0))))
-        console.log(this.paymentIntent)
     },
     methods: {
         async createCard (){
@@ -65,16 +64,17 @@ export default{
             let cvc = document.getElementById("cvc").value
             
             this.card = JSON.parse(await createPaymentMethod(ccn, expMonth, expYear, cvc))
-            console.log(this.card)
         },
         async makePayment(){
+            this.$emit('loader', true)
             await this.createCard()
             this.payment = await confirmPaymentIntent(this.paymentIntent, this.card)
-            console.log(this.payment)
             if(this.payment.status === "succeeded"){
                 sessionStorage.setItem('order', JSON.stringify(this.cart))
+                sessionStorage.setItem('payment', JSON.stringify(this.payment))
                 sessionStorage.removeItem('cart')
                 this.$router.push({name:'Order', params: {id: this.$route.params.id}})
+                
             }
         }
     }

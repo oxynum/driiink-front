@@ -1,4 +1,5 @@
 <template>
+  <ScreenLoader v-show="this.loader"/>
   <TheHeader/>
   <BarBrand :name="this.name" :address="this.address"/>
   <CategoryMenu :categories="this.categories"/>
@@ -12,6 +13,7 @@ import BarBrand from "@/components/BarBrand";
 import CategoryMenu from "@/components/CategoryMenu";
 import GoodDeal from "@/components/GoodDeal";
 import ProductList from "@/components/ProductList";
+import ScreenLoader from "@/components/ScreenLoader.vue";
 import { getBarInfo } from "@/services/getBarInfo";
 import { getMenu } from '@/services/getMenu';
 import { getMenuData } from '@/services/getMenuData';
@@ -22,6 +24,7 @@ import { driiink_api_response_parser } from '@/utils/parser';
 export default {
   name: "HomeView",
   components: {
+    ScreenLoader,
     TheHeader,
     BarBrand,
     CategoryMenu,
@@ -30,6 +33,7 @@ export default {
   },
   data() {
     return {
+      loader: true,
       promotions: [
         {
           "name": "Omega promo !",
@@ -73,8 +77,9 @@ export default {
     this.categories = await parseCategories(menu.products)
 
     this.products = await driiink_api_response_parser(this.categories, menu.products)
-  },
-  
+
+    this.loader = false
+  }
 }
 </script>
 
