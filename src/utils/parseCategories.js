@@ -5,5 +5,5 @@ export const parseCategories = async (products) => {
             categories.push(product.category.name)
         }
     });
-    return categories
+    return categories.sort((a, b) => a.localeCompare(b))
 }
