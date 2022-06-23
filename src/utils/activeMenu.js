@@ -18,12 +18,7 @@ export const activeMenu = async (menus) => {
     let dArr = d.split(':')
     let dAtSeconds = parseInt(dArr[0]) * 3600 + parseInt(dArr[1] * 60) + parseInt(dArr[2])
 
-    console.log('Active :', activeAtSeconds)
-    console.log('Actuel :', dAtSeconds)
-    console.log('Desactive :', desactiveAtSeconds)
-    
     if( (activeAtSeconds <= dAtSeconds) && (dAtSeconds < desactiveAtSeconds)){
-      console.log(true)
       activeMenu = e
     }
   })
