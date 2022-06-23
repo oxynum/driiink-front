@@ -40,6 +40,7 @@ export default{
           return (price/100).toFixed(2) + " €"
       },
       addToCart: function(){
+        this.cart = []
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
@@ -100,6 +101,7 @@ export default{
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        padding: 0 5px;
 
         & > button{
             border: none;
@@ -160,8 +162,11 @@ export default{
             border-radius: 20px;
             width: 22px;
             height: 22px;
-            background-color: #D7D7D7;
+            background-color: #F2F2F2;
             color: #8B8B8B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 

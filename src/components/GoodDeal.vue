@@ -106,6 +106,9 @@ export default {
     width: 36px;
     height: 30px;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 </style>

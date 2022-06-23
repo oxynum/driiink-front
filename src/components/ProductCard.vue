@@ -41,7 +41,7 @@ export default {
     .card{
         width: 187px;
         margin-bottom: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0, 0.3);
+        box-shadow: 0 4px 8px rgba(0,0,0, 0.2);
         border-radius: 20px;
         @media screen and (max-width: 375px){   
             .card{
@@ -63,7 +63,7 @@ export default {
             height: 176px;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
-            background-color: #D7D7D7;
+            background-color: #F2F2F2;
             display: flex;
             flex-direction: column;
             font-family: Nunito, serif;
