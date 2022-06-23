@@ -11,20 +11,18 @@
 <script>
 export default {
   name: 'CartInfo',
+  props:{
+    time: Number,
+  },
   data(){
     return {
-        time: 0,
         cart: []
     }
   },
   beforeMount(){
     if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
-      }
-
-    this.cart.forEach(el => {
-        this.time = this.time + parseInt(el.prepTime.slice(el.prepTime.indexOf(':') + 1, el.prepTime.lastIndexOf('+')).replace(':00', ''))
-    });
+    }
   },
   mounted(){
     window.addEventListener('storage', () => {

@@ -3,9 +3,11 @@
         <div class="cart-card-btn">
             <div class="add_to_cart"><button @click="removeFromCart()"> - </button> <p>{{ this.counter }}</p> <button @click="addToCart()"> + </button></div>
         </div>
-        <div class="cart-card-img">
-            <img src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="product image">
-        </div>
+        <router-link :to="{ name : 'PDP', params: { id: this.$route.params.id, productID: this.product.id}}">
+            <div class="cart-card-img">
+                <img src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="product image">
+            </div>
+        </router-link>
         <div class="cart-card-text">
             <h2>{{ this.product.name }}</h2>
             <p>{{ this.product.description }}</p>
@@ -38,27 +40,33 @@ export default{
           return (price/100).toFixed(2) + " €"
       },
       addToCart: function(){
+        if(JSON.parse(sessionStorage.getItem('cart'))){
+          this.cart = JSON.parse(sessionStorage.getItem('cart'))
+        }
         this.cart.push(this.product) 
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
         this.counter++
+        this.$emit('checkCart', true)
       },
       removeFromCart: function(){
-          this.cart = this.removeOneItem(this.product)
-          sessionStorage.setItem('cart', JSON.stringify(this.cart))
-          this.counter--
+        this.cart = this.removeOneItem(this.product)
+        sessionStorage.setItem('cart', JSON.stringify(this.cart))
+        this.counter--
+        this.$emit('checkCart', true)
       },
       removeOneItem(value){
         for(let i = this.cart.length - 1; i >= 0; i--){
-            if(this.cart[i].name == value.name ){
+            if(this.cart[i].id == value.id ){
                 this.cart.splice([i], 1)
                 return this.cart
             }
         }
       },
       removeAllFromCart(){
-        this.counter = 0
         this.cart = this.cart.filter(p => p.id !== this.product.id)
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
+        this.counter = 0
+        this.$emit('checkCart', true)
       },
     },
     async beforeMount() {

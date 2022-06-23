@@ -5,7 +5,7 @@
             <router-link :to="{ name: 'Payment', params: { id: this.id }}"><button class="payment-btn">Payer par carte</button>  </router-link> 
         </div>
         <div class="cart-total">
-            <p>Total : {{ this.totalPrice.toFixed(2) }} €</p>
+            <p>Total : {{ this.price.toFixed(2) }} €</p>
         </div>
     </div>
 </template>
@@ -13,10 +13,12 @@
 <script>
 export default {
     name: 'CartFooter',
+    props:{
+        price: Number
+    },
     data(){
         return{
             cart: [],
-            totalPrice: 0,
             id: this.$route.params.id,
         }
     },
@@ -25,9 +27,7 @@ export default {
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
 
-        this.cart.forEach(el => {
-            this.totalPrice = this.totalPrice + parseFloat((el.price/100).toFixed(2))
-        });
+        
     },
     
 }

@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'PDP', params: { productID: productInfo.id} }">
+    <router-link :to="{ name: 'PDP', params: {  productID: productInfo.id} }">
         <div class="card">
             <div class="card-img">
                 <img src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="cocktails">
