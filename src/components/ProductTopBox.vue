@@ -36,6 +36,10 @@ export default {
           return time.slice(time.indexOf(':') + 1, time.lastIndexOf('+')).replace(':00', '')
       },
       addToCart: function(){
+        this.cart = []
+        if(JSON.parse(sessionStorage.getItem('cart'))){
+            this.cart = JSON.parse(sessionStorage.getItem('cart'))
+        }
         this.cart.push(this.product) 
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
         this.counter++
@@ -64,7 +68,7 @@ export default {
         height:  281px;
         display: flex;
         flex-direction: column;
-        background-color: #D7D7D7;
+        background-color: #F2F2F2;
         position: relative;
 
         &-line{
