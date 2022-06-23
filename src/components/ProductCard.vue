@@ -2,7 +2,8 @@
     <router-link :to="{ name: 'PDP', params: {  productID: productInfo.id} }">
         <div class="card">
             <div class="card-img">
-                <img src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="cocktails">
+                <img v-show="productInfo.picture" :src="productInfo.picture" alt="cocktails">
+                <img v-show="!productInfo.picture" src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="cocktails">
             </div>
             <div class="card-text">
                 <h4>{{ productInfo.name }}</h4>
@@ -56,6 +57,12 @@ export default {
             border-top-right-radius: 20px;
             background-color: #21B05C;
             position: relative;
+            display: flex;
+            justify-content: center;
+
+            & > img {
+                height: 100%;
+            }
         }
         
         &-text{
@@ -114,8 +121,8 @@ export default {
 
     img{
         position: absolute;
-        top: 35px;
-        left: 40px;
+        top: 20px;
+        
     }
     
 </style>

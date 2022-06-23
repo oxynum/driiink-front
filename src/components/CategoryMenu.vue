@@ -38,7 +38,7 @@ export default {
     border-radius: 50px;
     border: none;
     color: black;
-    background-color: #d7d7d7;
+    background-color: #F2F2F2;
     text-decoration: none;
   }
 
