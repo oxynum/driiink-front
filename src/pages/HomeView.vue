@@ -74,6 +74,7 @@ export default {
     let temp = await activeMenu(barMenus)
 
     let menu = await getMenuData(temp.id)
+    console.log(menu)
     this.categories = await parseCategories(menu.products)
 
     this.products = await driiink_api_response_parser(this.categories, menu.products)
