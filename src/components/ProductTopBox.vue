@@ -4,7 +4,8 @@
             <router-link :to="{ name: 'PLP', params: {id: this.$route.params.id}}"><button><font-awesome-icon icon="angle-left" /></button></router-link>
             <p>⏱<span> : {{ prepTimeFormatter(product.prepTime) }} min</span></p>
         </div>
-        <img class="top-box-img" src="https://driiink.s3.eu-west-3.amazonaws.com/Mojito-PNG-Image+1.png" alt="cocktails">
+        <img v-show="this.product.picture" :src="this.product.picture" class="top-box-img" alt="cocktails">
+        <img v-show="!this.product.picture" class="top-box-img" src="https://driiink.s3.eu-west-3.amazonaws.com/Mojito-PNG-Image+1.png" alt="cocktails">
         <button class="add_to_cart" v-if="counter === 0" @click="addToCart()"> Ajouter au panier </button>
         <div class="add_to_cart btn_position" v-if="counter !== 0"> <button @click="removeFromCart()" > - </button> <p>{{ counter }}</p> <button @click="addToCart()"> + </button></div>
     </div>
@@ -65,11 +66,11 @@ export default {
 <style lang="scss" scoped>
     .top-box {
         width: 100%;
-        height:  281px;
         display: flex;
         flex-direction: column;
         background-color: #F2F2F2;
         position: relative;
+        padding-bottom: 2.5em;
 
         &-line{
             display: flex;
@@ -89,7 +90,7 @@ export default {
 
 
         &-img{
-            width: 112px;
+            width: 200px;
             margin: 0 auto;
         }
     }

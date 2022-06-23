@@ -10,11 +10,20 @@ export const activeMenu = async (menus) => {
     let desactiveArr = desactiveAt.split(':')
     let desactiveAtSeconds = parseInt(desactiveArr[0]) * 3600 + parseInt(desactiveArr[1] * 60) + parseInt(desactiveArr[2])
 
+    if(desactiveAtSeconds === 0){
+      desactiveAtSeconds = 86400
+    }
+
     let d = new Date().toLocaleTimeString()
     let dArr = d.split(':')
     let dAtSeconds = parseInt(dArr[0]) * 3600 + parseInt(dArr[1] * 60) + parseInt(dArr[2])
 
-    if( activeAtSeconds <= dAtSeconds < desactiveAtSeconds){
+    console.log('Active :', activeAtSeconds)
+    console.log('Actuel :', dAtSeconds)
+    console.log('Desactive :', desactiveAtSeconds)
+    
+    if( (activeAtSeconds <= dAtSeconds) && (dAtSeconds < desactiveAtSeconds)){
+      console.log(true)
       activeMenu = e
     }
   })
