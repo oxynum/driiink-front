@@ -1,5 +1,7 @@
 <template>
-    <CartProductCard v-for="product in formattedCart" :key="product" :product="product" :quantity="this.cart.filter(p => p.id === product.id).length" @checkCart="checkCart"/>
+    <div class="container">
+        <CartProductCard v-for="product in formattedCart" :key="product" :product="product" :quantity="this.cart.filter(p => p.id === product.id).length" @checkCart="checkCart"/>
+    </div>
 </template>
 
 <script>
@@ -43,10 +45,7 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-    .divider{
-        margin: 20px auto 0 auto;
-        border: 1px solid #000000;
-        opacity: 0.2;
-        width: 190px;
+    .container{
+        padding-bottom: 250px;
     }
 </style>

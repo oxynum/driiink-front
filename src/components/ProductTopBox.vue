@@ -6,8 +6,10 @@
         </div>
         <img v-show="this.product.picture" :src="this.product.picture" class="top-box-img" alt="cocktails">
         <img v-show="!this.product.picture" class="top-box-img" src="https://driiink.s3.eu-west-3.amazonaws.com/Mojito-PNG-Image+1.png" alt="cocktails">
-        <button class="add_to_cart" v-if="counter === 0" @click="addToCart()"> Ajouter au panier </button>
-        <div class="add_to_cart btn_position" v-if="counter !== 0"> <button @click="removeFromCart()" > - </button> <p>{{ counter }}</p> <button @click="addToCart()"> + </button></div>
+        <div class="top-box-btn">
+            <button class="add_to_cart" v-if="counter === 0" @click="addToCart()"> Ajouter au panier </button>
+            <div class="add_to_cart btn_position bounce" v-if="counter !== 0"> <button @click="removeFromCart()" > - </button> <p>{{ counter }}</p> <button @click="addToCart()"> + </button></div>
+        </div>
     </div>
 </template>
 
@@ -24,13 +26,12 @@ export default {
       }
   },
   async beforeMount(){
-      if((JSON.parse(sessionStorage.getItem('cart')).filter(product => product.id === this.product.id)).length > 0){
-          this.counter = (JSON.parse(sessionStorage.getItem('cart')).filter(product => product.id === this.product.id)).length
-      }
-      
-      if(JSON.parse(sessionStorage.getItem('cart'))){
+        if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
-      }
+        }
+        if(this.cart.filter(product => product.id === this.product.id).length > 0){
+            this.counter = this.cart.filter(product => product.id === this.product.id).length
+        } 
   },
   methods: {
       prepTimeFormatter: function(time) {
@@ -93,6 +94,12 @@ export default {
             width: 200px;
             margin: 0 auto;
         }
+
+        &-btn{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
     }
 
     button {
@@ -115,8 +122,8 @@ export default {
         font-family: Nunito, serif;
         font-weight: 600;
         position: absolute;
-        left: calc(50% - 117.5px);
         bottom: -25px;
+        margin: auto;
     }
 
     .btn_position{
@@ -124,6 +131,37 @@ export default {
         justify-content: space-evenly;
         align-items: center;
         width: 146px;
-        left: calc(50% - 73px);
+        margin: 0 auto;
+    }
+
+    .bounce{
+        animation: .6s cubic-bezier(0.4, -0.3, 0.4, 0) bounce;
+    }
+
+
+    @keyframes bounce {
+        0% {
+            width: 235px;
+        }
+
+        15% {
+            width: 146px;
+        }
+
+        45% {
+            width: 200px;
+        }
+
+        65% {
+            width: 146px;
+        }
+
+        88%{
+            width: 165px;
+        }
+
+        100%{
+            width: 146px;
+        }
     }
 </style>
