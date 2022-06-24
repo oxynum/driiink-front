@@ -27,6 +27,7 @@ export default{
         const ids = this.cart.map(o => o.id)
         this.formattedCart = this.cart.filter(({id}, index) => !ids.includes(id, index + 1))
     },
+    
     methods:{
         checkCart(v){
             this.cart = JSON.parse(sessionStorage.getItem('cart'))

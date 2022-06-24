@@ -29,10 +29,14 @@ export default {
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
+            
+  },
+  mounted(){
         if(this.cart.filter(product => product.id === this.product.id).length > 0){
             this.counter = this.cart.filter(product => product.id === this.product.id).length
+            console.log('counter',this.counter)
         } 
-  },
+    },
   methods: {
       prepTimeFormatter: function(time) {
           return time.slice(time.indexOf(':') + 1, time.lastIndexOf('+')).replace(':00', '')
