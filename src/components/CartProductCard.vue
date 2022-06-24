@@ -64,6 +64,10 @@ export default{
         }
       },
       removeAllFromCart(){
+        this.cart = []
+        if(JSON.parse(sessionStorage.getItem('cart'))){
+          this.cart = JSON.parse(sessionStorage.getItem('cart'))
+        }
         this.cart = this.cart.filter(p => p.id !== this.product.id)
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
         this.counter = 0

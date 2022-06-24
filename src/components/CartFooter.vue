@@ -44,7 +44,7 @@ export default {
         justify-content: space-evenly;
         align-items: center;
         width: 100%;
-        padding-top: 200px;
+        padding-top: 150px;
         background: linear-gradient(180deg, rgba(255,255,255,0) 15%, rgba(255,255,255,1) 100%);
 
         & > a > button {

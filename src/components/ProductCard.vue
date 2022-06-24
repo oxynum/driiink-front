@@ -10,7 +10,9 @@
                 <p>{{ productInfo.description }}</p>
                 <div class="card-text-price">
                     <span>{{ priceFormatter(productInfo.price) }}</span>
-                    <button>+</button>
+                    <div class="card-text-price-btn">
+                        <button @click="addToCart($event)" v-show="!this.added">+</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,13 +23,34 @@
 
 export default {
   name: "ProductCard",
+  data(){
+    return {
+        cart : [],
+        added: false,
+    }
+  },
   props: {
     productInfo: Object,
+  },
+  beforeMount(){
+    if(JSON.parse(sessionStorage.getItem('cart'))){
+        this.cart = JSON.parse(sessionStorage.getItem('cart'))
+    }
   },
   methods: {
       priceFormatter: function(price) {
           return (price/100).toFixed(2) + " €"
-      }
+      },
+      addToCart: function(event){
+        event.preventDefault()
+        this.cart = []
+        if(JSON.parse(sessionStorage.getItem('cart'))){
+          this.cart = JSON.parse(sessionStorage.getItem('cart'))
+        }
+        this.cart.push(this.productInfo) 
+        sessionStorage.setItem('cart', JSON.stringify(this.cart))
+        console.log(JSON.parse(sessionStorage.getItem('cart')))
+      },
   },
 }
 
@@ -106,7 +129,7 @@ export default {
                     font-weight: bold;
                 }
 
-                & > button {
+                &-btn > button {
                     border: none;
                     border-radius: 50%;
                     width: 30px;
@@ -124,5 +147,6 @@ export default {
         top: 20px;
         
     }
-    
+
+
 </style>
