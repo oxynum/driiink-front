@@ -25,16 +25,23 @@ export default {
           cart: [],
       }
   },
-  async beforeMount(){
+  beforeCreate(){
+    console.log(this.product)
+  },
+//   async beforeMount(){
+    
+            
+//   },
+  mounted(){
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
-            
-  },
-  mounted(){
+
+        console.log('product id',this.product.id)
         if(this.cart.filter(product => product.id === this.product.id).length > 0){
             this.counter = this.cart.filter(product => product.id === this.product.id).length
             console.log('counter',this.counter)
+            
         } 
     },
   methods: {

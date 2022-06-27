@@ -1,19 +1,21 @@
 export const confirmPaymentIntent = async(payment_intent, payment_methods) => {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    myHeaders.append("Authorization", process.env.VUE_APP_STRIPE_KEY);
+    myHeaders.append("Authorization", process.env.VUE_APP_API_KEY);
+    myHeaders.append("Content-Type", "application/json");
 
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("payment_method", payment_methods.id);
+    var raw = JSON.stringify({
+        "paymentIntentID": payment_intent,
+        "paymentMethodID": payment_methods
+    });
 
     var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: urlencoded,
-    redirect: 'follow'
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
     };
 
-    let response = await (await fetch("https://api.stripe.com//v1/payment_intents/"+ payment_intent.id +"/confirm", requestOptions)).json()
+    let response = await (await fetch(process.env.VUE_APP_URL + "confirmPayment", requestOptions)).json()
 
     return response
 }
