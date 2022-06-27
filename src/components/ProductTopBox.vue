@@ -25,15 +25,8 @@ export default {
           cart: [],
       }
   },
-  beforeCreate(){
-    console.log(this.product)
-  },
-//   async beforeMount(){
-    
-            
-//   },
-  mounted(){
-        if(JSON.parse(sessionStorage.getItem('cart'))){
+  created(){
+    if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
 
@@ -43,7 +36,7 @@ export default {
             console.log('counter',this.counter)
             
         } 
-    },
+  },
   methods: {
       prepTimeFormatter: function(time) {
           return time.slice(time.indexOf(':') + 1, time.lastIndexOf('+')).replace(':00', '')
