@@ -1,7 +1,7 @@
 <template>
     <div>
-        <TheHeader/>
-        <ProductTopBox :product="this.product"/>
+        <TheHeader :counter="this.counter" />
+        <ProductTopBox :product="this.product" @checkCounter="checkCounter"/>
         <ProductBottomBox :product="this.product"/>
     </div>
 </template>
@@ -23,11 +23,27 @@ export default {
     data() {
         return{
             product: null,
+            cart: [],
+            counter: 0,
         }
     }, 
+    methods:{
+        checkCounter(v){
+            if(v){
+                this.counter = 0
+                this.cart = JSON.parse(sessionStorage.getItem('cart'))
+                this.counter = this.cart.length
+            }
+        }
+    },
     async beforeMount(){
         const productID = this.$route.params.productID
         this.product = await getProduct(productID)
+        
+        if(JSON.parse(sessionStorage.getItem("cart"))){
+            this.cart = JSON.parse(sessionStorage.getItem("cart"))
+            this.counter = this.cart.length
+        }
     },
     
 }

@@ -76,7 +76,6 @@ export default{
                 sessionStorage.setItem('payment', JSON.stringify(this.payment))
                 sessionStorage.removeItem('cart')
                 this.$router.push({name:'Order', params: {id: this.$route.params.id}})
-                
             }
         }
     }

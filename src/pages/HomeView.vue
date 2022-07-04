@@ -1,10 +1,10 @@
 <template>
   <ScreenLoader v-show="this.loader"/>
-  <TheHeader/>
+  <TheHeader :counter="this.counter" @checkCart="checkCart"/>
   <BarBrand :name="this.name" :address="this.address"/>
   <CategoryMenu :categories="this.categories"/>
   <GoodDeal :promotions="this.promotions" />
-  <ProductList v-for="productList in products" :key="productList" :productList="productList"/>
+  <ProductList v-for="productList in products" :key="productList" :productList="productList" @checkCounter="checkCounter"/>
 </template>
 
 <script>
@@ -60,7 +60,8 @@ export default {
       name : null,
       address: null,
       menu: null,
-      products: null
+      products: null,
+      counter: 0,
     }
   },
   async beforeMount(){
@@ -78,7 +79,20 @@ export default {
 
     this.products = await driiink_api_response_parser(this.categories, menu.products)
 
+    if(JSON.parse(sessionStorage.getItem('cart'))){
+          this.counter = JSON.parse(sessionStorage.getItem('cart')).length
+    }
+
     this.loader = false
+  },
+  methods: {
+    checkCounter(v){
+      if(v){
+        this.counter = 0
+        this.cart = JSON.parse(sessionStorage.getItem('cart'))
+        this.counter = this.cart.length
+      }
+    } 
   }
 }
 </script>
