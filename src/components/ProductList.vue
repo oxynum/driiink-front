@@ -2,7 +2,7 @@
   <div class="container">
     <h3>{{ productList.category }}</h3>
     <div class="card-container">
-      <ProductCard v-for="singleProduct in productList.products[0]" :key="singleProduct" :productInfo="singleProduct"/>
+      <ProductCard v-for="singleProduct in productList.products[0]" :key="singleProduct" :productInfo="singleProduct" @checkCounter="checkCounter"/>
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
   },
   props: {
     productList: Object,
+  },
+  methods:{
+    checkCounter(v){
+      this.$emit("checkCounter", v)
+    }
   }
 }
 </script>

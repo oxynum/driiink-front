@@ -1,5 +1,5 @@
 <template>
-    <TheHeader/>
+    <TheHeader :counter="this.counter"/>
     <CartInfo :time="this.time"/>
     <CartProductList @checkCart="checkCart"/>
     <CartFooter :price="this.price"/>
@@ -24,12 +24,14 @@ export default {
       return {
         cart: [],
         time: 0,
-        price: 0
+        price: 0,
+        counter: 0
       }
   },
   beforeMount(){      
       if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
+          this.counter = this.cart.length
       }
 
       this.cart.forEach(el => {
@@ -42,11 +44,13 @@ export default {
         if(v){
             this.cart = JSON.parse(sessionStorage.getItem('cart'))
             this.time = 0
+            this.counter = 0
             this.price = 0
             this.cart.forEach(el => {
                 this.time = this.time + parseInt(el.prepTime.slice(el.prepTime.indexOf(':') + 1, el.prepTime.lastIndexOf('+')).replace(':00', ''))
                 this.price = this.price + parseFloat((el.price/100).toFixed(2))
             });
+            this.counter = this.cart.length
         }
     }
   }

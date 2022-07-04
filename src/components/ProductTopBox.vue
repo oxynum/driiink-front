@@ -25,17 +25,17 @@ export default {
           cart: [],
       }
   },
-  created(){
-    if(JSON.parse(sessionStorage.getItem('cart'))){
-          this.cart = JSON.parse(sessionStorage.getItem('cart'))
-        }
+  async created(){
+    const item = await sessionStorage.getItem('cart')
+    if(JSON.parse(item)){
+        this.cart = JSON.parse(sessionStorage.getItem('cart'))
+    }
 
-        console.log('product id',this.product.id)
-        if(this.cart.filter(product => product.id === this.product.id).length > 0){
-            this.counter = this.cart.filter(product => product.id === this.product.id).length
-            console.log('counter',this.counter)
-            
-        } 
+    console.log('product id',this.product.id)
+    if(this.cart.filter(product => product.id === this.product.id).length > 0){
+        this.counter = this.cart.filter(product => product.id === this.product.id).length
+        console.log('counter',this.counter)
+    } 
   },
   methods: {
       prepTimeFormatter: function(time) {
@@ -49,11 +49,13 @@ export default {
         this.cart.push(this.product) 
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
         this.counter++
+        this.$emit('checkCounter', true)
       },
       removeFromCart: function(){
-          this.cart = this.removeOneItem(this.product)
-          sessionStorage.setItem('cart', JSON.stringify(this.cart))
-          this.counter--
+        this.cart = this.removeOneItem(this.product)
+        sessionStorage.setItem('cart', JSON.stringify(this.cart))
+        this.$emit('checkCounter', true)
+        this.counter--          
       },
       removeOneItem(value){
         for(let i = this.cart.length - 1; i >= 0; i--){

@@ -11,7 +11,7 @@
                 <div class="card-text-price">
                     <span>{{ priceFormatter(productInfo.price) }}</span>
                     <div class="card-text-price-btn">
-                        <button @click="addToCart($event)" v-show="!this.added">+</button>
+                        <button @click="addToCart($event)">+</button>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,6 @@ export default {
   data(){
     return {
         cart : [],
-        added: false,
     }
   },
   props: {
@@ -49,7 +48,7 @@ export default {
         }
         this.cart.push(this.productInfo) 
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
-        console.log(JSON.parse(sessionStorage.getItem('cart')))
+        this.$emit('checkCounter', true)
       },
   },
 }

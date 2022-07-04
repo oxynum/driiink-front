@@ -6,7 +6,8 @@
       <span></span>
     </div>
     <div class="cart">
-      <router-link :to="{ name: 'Cart', params: { id: this.id} }"><font-awesome-icon icon="cart-shopping" /></router-link> 
+      <router-link :to="{ name: 'Cart', params: { id: this.id} }"><font-awesome-icon icon="cart-shopping" /></router-link>
+      <div>{{ counter }}</div> 
     </div>
   </header>
 </template>
@@ -14,16 +15,26 @@
 <script>
 export default {
   name: 'HeaderComponent',
+  props:{
+    counter: Number
+  },
   data() {
     return {
-      id: this.$route.params.id 
+      id: this.$route.params.id,
+      cart: []
     }
+  },
+  async beforeMount(){
+    if(JSON.parse(sessionStorage.getItem('cart'))){
+        this.cart = JSON.parse(sessionStorage.getItem('cart'))
+    }
+
   }
 }
 
 </script>
 
-<style>
+<style lang="scss" scoped>
   header{
     display: flex;
     justify-content: space-between;
@@ -55,6 +66,24 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+
+    & > div {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background-color: #21B05C;
+      color: white;
+      font-family:  Nunito, serif;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
   }
 
   a{
