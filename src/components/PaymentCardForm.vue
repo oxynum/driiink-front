@@ -31,6 +31,8 @@
 import { createPaymentMethod } from '@/services/createPaymentMethod'
 import { confirmPaymentIntent } from '@/services/confirmPaymentIntent'
 import { createPaymentIntent } from '@/services/createPaymentIntent';
+import { postOrder } from '@/services/postOrder';
+
 
  
 export default{
@@ -72,9 +74,9 @@ export default{
             this.payment = await confirmPaymentIntent(this.paymentIntent.id, this.card.id)
             console.log(this.payment)
             if(this.payment.status === "succeeded"){
-                sessionStorage.setItem('order', JSON.stringify(this.cart))
-                sessionStorage.setItem('payment', JSON.stringify(this.payment))
                 sessionStorage.removeItem('cart')
+                let order = await postOrder(this.cart) 
+                sessionStorage.setItem('order', JSON.stringify(order))
                 this.$router.push({name:'Order', params: {id: this.$route.params.id}})
             }
         }

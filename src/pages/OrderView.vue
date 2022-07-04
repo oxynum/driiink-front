@@ -1,7 +1,7 @@
 <template>
-    <TheHeader/>
-    <OrderInfo/>
-    <OrderProductList/>
+    <TheHeader :counter="this.counter"/>
+    <OrderInfo :order="this.order"/>
+    <OrderProductList :order="this.order"/>
 </template>
 
 <script>
@@ -19,17 +19,18 @@ export default{
     data(){
         return{
             order: [],
+            counter: 0
         }
     },
     beforeMount(){
         if(JSON.parse(sessionStorage.getItem('order'))){
           this.order = JSON.parse(sessionStorage.getItem('order'))
         }
+        if(JSON.parse(sessionStorage.getItem('cart'))){
+          this.counter = JSON.parse(sessionStorage.getItem('cart').length)
+        }
 
     },
-    mounted(){
-        //AJOUTEZ LE CALL API POUR AJOUTER UNE ORDER DANS L'API
-    }
 }
 </script>
 

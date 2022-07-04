@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Commande en cours de préparation</h2>
-        <h2>Numéro : 1</h2>
+        <h2>Numéro : {{ order.id }}</h2>
         <div>
             <p>Plus que :</p>
             <p>⏱ <span>: {{ this.time }} min</span></p>
@@ -12,19 +12,17 @@
 <script>
 export default{
     name: 'OrderInfo',
+    props:{
+        order : Array
+    },
     data(){
         return {
-            order: [],
             time: 0
         }
     },
     beforeMount(){
-        if(JSON.parse(sessionStorage.getItem('order'))){
-          this.order = JSON.parse(sessionStorage.getItem('order'))
-        }
-
-        this.order.forEach(el => {
-            this.time = this.time + parseInt(el.prepTime.slice(el.prepTime.indexOf(':') + 1, el.prepTime.lastIndexOf('+')).replace(':00', ''))
+        this.order.orderItems.forEach(el => {
+            this.time = this.time + (parseInt(el.product.prepTime.slice(el.product.prepTime.indexOf(':') + 1, el.product.prepTime.lastIndexOf('+')).replace(':00', '')) * el.quantity)
         });
     }
 }
