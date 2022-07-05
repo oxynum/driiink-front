@@ -5,7 +5,8 @@
         </div>
         <router-link :to="{ name : 'PDP', params: { id: this.$route.params.id, productID: this.product.id}}">
             <div class="cart-card-img">
-                <img src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="product image">
+                <img v-show="this.product.picture" :src="this.product.picture" class="top-box-img" alt="cocktails">
+                <img v-show="!this.product.picture" src="https://driiink.s3.eu-west-3.amazonaws.com/png-transparent-red-cocktail-red-drink-cocktail-thumbnail-removebg-preview+2.png" alt="product image">
             </div>
         </router-link>
         <div class="cart-card-text">
@@ -124,7 +125,10 @@ export default{
         &-img {
             width: 47px;
             height: 68px;
-            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
             & > img{
                 width: 100%;
             }
@@ -174,6 +178,7 @@ export default{
         }
     }
 
+    
     
 
 </style>

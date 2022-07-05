@@ -1,11 +1,8 @@
 <template>
     <div class="container">
         <div class="cart-btn">
-            <router-link :to="{ name: 'Order', params: { id: this.id }}"><button class="order-btn" >Comptoir</button> </router-link> 
-            <router-link :to="{ name: 'Payment', params: { id: this.id }}"><button class="payment-btn">Payer par carte</button>  </router-link> 
-        </div>
-        <div class="cart-total">
-            <p>Total : {{ this.price.toFixed(2) }} €</p>
+            <router-link v-show="this.counter != 0" :to="{ name: 'Payment', params: { id: this.id }}"><button class="payment-btn">Payer {{ this.price.toFixed(2) }}€</button></router-link> 
+            <router-link v-show="this.counter == 0" :to="{ name: 'PLP', params: { id: this.id }}"><button class="payment-btn">Checker la carte 🍸</button></router-link> 
         </div>
     </div>
 </template>
@@ -14,7 +11,8 @@
 export default {
     name: 'CartFooter',
     props:{
-        price: Number
+        price: Number,
+        counter: Number
     },
     data(){
         return{
@@ -25,9 +23,7 @@ export default {
     beforeMount(){
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
-        }
-
-        
+        }        
     },
     
 }

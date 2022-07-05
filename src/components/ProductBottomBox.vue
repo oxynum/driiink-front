@@ -10,7 +10,7 @@
             <div class="bottom-box-ing-container">
                 <div class="bottom-box-ing-container-card" v-for="ingredient in product.ingredient" :key="ingredient">
                     <img src="https://driiink.s3.eu-west-3.amazonaws.com/vodka+1.png" alt="vodka">
-                    <span>{{ ingredient.name}}</span>
+                    <p>{{ ingredient.name}}</p>
                 </div>                
             </div>
         </div>
@@ -52,6 +52,7 @@ export default {
             &-price {
                 font-size: 20px;
                 font-weight: bold;
+                min-width: 75px;
             }
         }
 
@@ -86,7 +87,7 @@ export default {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    background-color: #D7D7D7;
+                    background-color: #F2F2F2;
                     padding: 10px 14px;
                     border-radius: 19px;
                     margin-right: 20px;
@@ -96,9 +97,12 @@ export default {
                         margin-bottom: 2px;
                     }
 
-                    & > span {
+                    & > p {
                         font-size: 12px;
                         font-weight: 600;
+                        width: 100px;
+                        white-space: pre-line;
+                        text-align: center;
                     }
                 }
             }
