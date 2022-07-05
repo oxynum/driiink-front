@@ -4,7 +4,7 @@
             <router-link :to="{ name: 'PLP', params: {id: this.$route.params.id}}"><button><font-awesome-icon icon="angle-left" /></button></router-link>
             <p>⏱<span> : {{ prepTimeFormatter(product.prepTime) }} min</span></p>
         </div>
-        <img v-show="this.product.picture" :src="this.product.picture" class="top-box-img" alt="cocktails">
+        <img v-show="this.product.picture" :src="this.product.picture" v-bind:class="{ bigImg: this.product.ingredient.length == 0 }" class="top-box-img" alt="cocktails">
         <img v-show="!this.product.picture" class="top-box-img" src="https://driiink.s3.eu-west-3.amazonaws.com/Mojito-PNG-Image+1.png" alt="cocktails">
         <div class="top-box-btn">
             <button class="add_to_cart" v-if="counter === 0" @click="addToCart()"> Ajouter au panier </button>
@@ -34,11 +34,6 @@ export default {
     if(this.cart.filter(product => product.id === this.product.id).length > 0){
         this.counter = this.cart.filter(product => product.id === this.product.id).length
     } 
-  },
-  mounted(){
-    if(this.product.ingredient.length == 0){
-        document.getElementsByClassName('top-box-img')[0].classList.toggle('big-img')
-    }
   },
   methods: {
       prepTimeFormatter: function(time) {
@@ -135,7 +130,7 @@ export default {
         margin: auto;
     }
 
-    .big-img{
+    .bigImg{
         width: 400px;
     }
 
