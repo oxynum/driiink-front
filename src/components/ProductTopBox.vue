@@ -131,7 +131,7 @@ export default {
     }
 
     .bigImg{
-        width: 400px;
+        width: 350px;
     }
 
     .btn_position{
