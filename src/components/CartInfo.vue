@@ -3,8 +3,9 @@
         <div class="cart-info-return">
             <router-link :to="{ name: 'PLP', params: { id: this.$route.params.id} }"><button><font-awesome-icon icon="angle-left" /></button></router-link>
         </div>
-        <h2 class="cart-info-title">Ta commande 🗒</h2>
-        <p class="cart-info-time">⏱<span> : {{ this.time }} min</span></p>
+        <h2 v-show="this.counter == 0" class="cart-info-title">Ta commande est vide 🗒</h2>
+        <h2 v-show="this.counter !=0" class="cart-info-title">Ta commande 🗒</h2>
+        <p v-show="this.counter !=0" class="cart-info-time">⏱<span> : {{ this.time }} min</span></p>
     </div>
 </template>
 
@@ -13,6 +14,7 @@ export default {
   name: 'CartInfo',
   props:{
     time: Number,
+    counter: Number
   },
   data(){
     return {
@@ -45,6 +47,7 @@ export default {
         }
 
         &-title{
+            margin-top: 10px;
             font-size: 24px;
             font-weight: bold;
         }

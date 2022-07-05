@@ -31,11 +31,14 @@ export default {
         this.cart = JSON.parse(sessionStorage.getItem('cart'))
     }
 
-    console.log('product id',this.product.id)
     if(this.cart.filter(product => product.id === this.product.id).length > 0){
         this.counter = this.cart.filter(product => product.id === this.product.id).length
-        console.log('counter',this.counter)
     } 
+  },
+  mounted(){
+    if(this.product.ingredient.length == 0){
+        document.getElementsByClassName('top-box-img')[0].classList.toggle('big-img')
+    }
   },
   methods: {
       prepTimeFormatter: function(time) {
@@ -97,7 +100,7 @@ export default {
 
 
         &-img{
-            width: 200px;
+            width: 125px;
             margin: 0 auto;
         }
 
@@ -130,6 +133,10 @@ export default {
         position: absolute;
         bottom: -25px;
         margin: auto;
+    }
+
+    .big-img{
+        width: 400px;
     }
 
     .btn_position{

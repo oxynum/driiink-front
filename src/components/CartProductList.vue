@@ -1,6 +1,10 @@
 <template>
-    <div class="container">
+    <div class="container" v-show="this.cart.length != 0" >
         <CartProductCard v-for="product in formattedCart" :key="product" :product="product" :quantity="this.cart.filter(p => p.id === product.id).length" @checkCart="checkCart"/>
+    </div>
+    <div class="cart-empty" v-show="this.cart.length == 0">
+        <img class="cart-empty-img" src="https://driiink.s3.eu-west-3.amazonaws.com/cart-empty.png" alt="Cart empty">
+        <h2>Il n'y a rien pour l'instant 😓</h2>
     </div>
 </template>
 
@@ -48,5 +52,20 @@ export default{
 <style lang="scss" scoped>
     .container{
         padding-bottom: 250px;
+    }
+
+    .cart-empty{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 108px;
+        flex-direction: column;
+
+        & > h2 {
+            font-size: 24px;
+            font-family: Nunito, serif;
+            font-weight: bold;
+            margin-top: 30px;
+        }
     }
 </style>

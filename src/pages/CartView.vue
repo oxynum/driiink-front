@@ -1,8 +1,8 @@
 <template>
     <TheHeader :counter="this.counter"/>
-    <CartInfo :time="this.time"/>
+    <CartInfo :time="this.time" :counter="this.counter"/>
     <CartProductList @checkCart="checkCart"/>
-    <CartFooter :price="this.price"/>
+    <CartFooter :price="this.price" :counter="this.counter"/>
 </template>
 
 <script>
@@ -51,6 +51,7 @@ export default {
                 this.price = this.price + parseFloat((el.price/100).toFixed(2))
             });
             this.counter = this.cart.length
+            
         }
     }
   }
