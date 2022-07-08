@@ -62,10 +62,10 @@ export default {
     }
 
     .card{
-        width: 187px;
         margin-bottom: 15px;
         box-shadow: 0 4px 8px rgba(0,0,0, 0.2);
         border-radius: 20px;
+        flex-basis: 100%;
         
 
         &-img{
@@ -77,6 +77,7 @@ export default {
             position: relative;
             display: flex;
             justify-content: center;
+            z-index: 2;
 
             & > img {
                 height: 100%;
@@ -94,13 +95,14 @@ export default {
             font-family: Nunito, serif;
             padding: 0 0 0 20px;
             color: #000;
+            position: relative;
 
             & > h4 {
                 margin: 30px 0 0 0;
                 font-size: 14px;
                 font-weight: bold;
                 padding-right: 5px;
-                height: 20px;
+                max-width: 147px
             }
 
             & > p {
@@ -118,6 +120,9 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                position: absolute;
+                bottom: 5px;
+                width: 85%;
 
                 & > span {
                     font-size: 20;
