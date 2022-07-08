@@ -37,13 +37,16 @@ h3{
   margin-left: 10px;
 }
 
+
 .card-container{
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: flex-start;
   margin-top: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  padding: 10px;
 }
-
 
 </style>
