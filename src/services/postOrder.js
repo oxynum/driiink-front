@@ -16,18 +16,20 @@ export const postOrder = async (order) => {
         product.push(temp)
     });
 
-    var raw = JSON.stringify({
+    const raw = JSON.stringify({
         "status": "/api/order_statuses/1",
         "orderItems": product
     });
 
-    var requestOptions = {
+    const requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
     
-    let response = await (await fetch("https://driiink-api.herokuapp.com/api/orders", requestOptions)).json()
+    const response = await (await fetch("https://driiink-api.herokuapp.com/api/orders", requestOptions)).json()
+
+    // TODO: Handle API errors
     return response
 }
