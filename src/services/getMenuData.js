@@ -1,10 +1,11 @@
+import Driiink_API from "@/entity/driiink_api";
+
 export const getMenuData = async (menuID) => {
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", process.env.VUE_APP_API_KEY);
+    const driiink_api = new Driiink_API();
 
     const requestOptions = {
       method: 'GET',
-      headers: myHeaders,
+      headers: driiink_api.header,
       redirect: 'follow'
     };
 

@@ -1,18 +1,32 @@
+import Driiink_API from "@/entity/driiink_api";
+
 export const getBarInfo = async (barID) => {
-    let barInfo = {}
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", process.env.VUE_APP_API_KEY);
+    const driiink_api = new Driiink_API()
+    
+    return driiink_api.getBarInfoById(barID)
 
-    const requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
+    //RAJOUTE LE HANDLING D'ERREUR
 
-    const el = await (await fetch(process.env.VUE_APP_URL + 'bars/' + barID, requestOptions)).json()
-    // TODO: HAndle Errors from API call
-    barInfo.name = el.name
-    barInfo.address = el.adress
-    return barInfo
+    
+
+    // const requestOptions = {
+    //   method: 'GET',
+    //   headers: driiink_api,
+    //   redirect: 'follow'
+    // };
+    
+  
+    // return await fetch(process.env.VUE_APP_URL + 'bars/' + barID, requestOptions)
+    //   .then(async (resp) => {
+    //     const data = await resp.json()
+    //     if (!data.name){
+    //       return "DATA WAS NOT FOUND"
+    //     }
+    //     console.log(data)
+    //     return data
+    //   })
+    //   .catch((error) => {
+    //     return "DATA WAS NOT FOUND" + error
+    //   })
 }
 

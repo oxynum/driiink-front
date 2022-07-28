@@ -64,6 +64,7 @@ export default{
             let expMonth = document.getElementById("expMonth").value
             let expYear = document.getElementById("expYear").value
             let cvc = document.getElementById("cvc").value
+            //A ENLEVER
             
             this.card = await createPaymentMethod(ccn, expMonth, expYear, cvc)
             console.log(this.card)

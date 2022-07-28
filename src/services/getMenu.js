@@ -1,17 +1,15 @@
+import Driiink_API from "@/entity/driiink_api";
+
 export const getMenu = async (barID) => {
-    let barMenu = []
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", process.env.VUE_APP_API_KEY);
+    const driiink_api = new Driiink_API();
 
     const requestOptions = {
       method: 'GET',
-      headers: myHeaders,
+      headers: driiink_api.header,
       redirect: 'follow'
     };
-
+    
     const el = await (await fetch(process.env.VUE_APP_URL + 'bars/' + barID, requestOptions)).json()
-    // TODO: HAndle errors of API call
-    barMenu = el.menu
-    return barMenu    
+    return el.menu    
 }
 

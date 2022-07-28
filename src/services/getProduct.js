@@ -1,17 +1,15 @@
+import Driiink_API from "@/entity/driiink_api";
+
 export const getProduct = async (productID) => {
-    let product = {}
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", process.env.VUE_APP_API_KEY);
+    const driiink_api = new Driiink_API();
 
     const requestOptions = {
       method: 'GET',
-      headers: myHeaders,
+      headers: driiink_api.header,
       redirect: 'follow'
     };
 
     const el = await (await fetch(process.env.VUE_APP_URL + 'products/' + productID, requestOptions)).json()
-    // TODO: Handle errors of API call
-    product = el
-    return product 
+    return el 
 }
 

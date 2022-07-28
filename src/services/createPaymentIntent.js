@@ -1,15 +1,15 @@
-export const createPaymentIntent = async (amount) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", process.env.VUE_APP_API_KEY);
-    myHeaders.append("Content-Type", "application/json");
+import Driiink_API from "@/entity/driiink_api";
 
+export const createPaymentIntent = async (amount) => {
+    const driiink_api = new Driiink_API();
+    
     const raw = JSON.stringify({
       "price": amount
     });
 
     const requestOptions = {
       method: 'POST',
-      headers: myHeaders,
+      headers: driiink_api.header,
       body: raw,
       redirect: 'follow'
     };

@@ -67,14 +67,14 @@ export default {
   async beforeMount(){
     const barID = this.$route.params.id
 
-    let barInfo = await getBarInfo(barID)
+    const barInfo = await getBarInfo(barID)
     this.name = barInfo.name
-    this.address = barInfo.address
+    this.address = barInfo.adress
     
-    let barMenus = await getMenu(barID)
-    let temp = await activeMenu(barMenus)
+    const barMenus = await getMenu(barID)
+    const temp = await activeMenu(barMenus)
 
-    let menu = await getMenuData(temp.id)
+    const menu = await getMenuData(temp.id)
     this.categories = await parseCategories(menu.products)
 
     this.products = await driiink_api_response_parser(this.categories, menu.products)
