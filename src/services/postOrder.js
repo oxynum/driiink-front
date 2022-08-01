@@ -1,7 +1,7 @@
+import AppError from "@/entity/AppError";
 import Driiink_API from "@/entity/driiink_api";
 
 export const postOrder = async (order) => {
-    const driiink_api = new Driiink_API();
     
     let ids = order.map(o => o.id)
     let uniqueProduct = order.filter(({id}, index) => !ids.includes(id, index + 1))
@@ -19,15 +19,12 @@ export const postOrder = async (order) => {
         "orderItems": product
     });
 
-    const requestOptions = {
-        method: 'POST',
-        headers: driiink_api.headers,
-        body: raw,
-        redirect: 'follow'
-    };
-    
-    const response = await (await fetch("https://driiink-api.herokuapp.com/api/orders", requestOptions)).json()
+    try {
+        const driiink_api = new Driiink_API();
+        const response = driiink_api.postOrder(raw)
+        return response
+    } catch (error) {
+        throw new AppError('Request Api Error', error)
+    }
 
-    // TODO: Handle API errors
-    return response
 }

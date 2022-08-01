@@ -1,7 +1,10 @@
+import { BASE_URL, DRIIINK_API_KEY } from "@/config";
+import ApiError from "./ApiError";
+
 class Driiink_API {    
     constructor(){
         this.header = new Headers()
-        this.header.append("Authorization", process.env.VUE_APP_API_KEY);
+        this.header.append("Authorization", DRIIINK_API_KEY);
         this.header.append("Content-Type", "application/json");
     }
 
@@ -43,26 +46,94 @@ class Driiink_API {
         return this.header.entries()
     }
 
-    async getBarInfoByID(id){
-        const requestOptions = {
-            method: 'GET',
+    /**
+     * Create the request option for your request 
+     * @param {String} type Type of the request you want to send
+     * @param {JSON} body A JSON with all the data you want to send
+     * @returns {Object} an object with the request option for your request 
+     */
+    loadHeader(type = 'GET', body = null){
+        return {
+            method: type,
             headers: this.header,
+            body: body,
             redirect: 'follow'
-        };
-
-        return await fetch(process.env.VUE_APP_URL + 'bars/' + id, requestOptions)
-            .then(async (resp) => {
-                const data = await resp.json()
-                if (!data.name){
-                    return "DATA WAS NOT FOUND"
-                }
-                console.log(data)
-                return data
-            })
-            .catch((error) => {
-                return "DATA WAS NOT FOUND" + error
-            })
         }
+    }
+
+    async getBarInfoByID(id = null){
+        if (!id) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader()
+
+        const response = await (await fetch(`${BASE_URL}/bars/${id}`, requestOptions)).json()
+        // const response = await Promise.all([fetch(`${BASE_URL}/bars/${id}`, requestOptions)])
+        //     .then(async (resp) => {
+        //         const data = resp.json()
+        //         return data
+        //     })
+        if(!response) throw new ApiError('No Data available', 404, false)
+        return response 
+    }
+
+    async getMenusById(id = null){
+        if (!id) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader()
+
+        const response = await (await fetch(`${BASE_URL}/bars/${id}`, requestOptions)).json()
+        if(!response.menu) throw new ApiError('No Data available', 404, false)
+        return response.menu
+    }
+
+    async getProductOfMenu(id = null){
+        if (!id) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader()
+        
+        const response = await (await fetch(`${BASE_URL}/menus/${id}`, requestOptions)).json()
+        if(!response) throw new ApiError('No Data available', 404, false)
+        return response 
+    }
+
+    async getProduct(id = null){
+        if (!id) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader()
+
+        const response = await (await fetch(`${BASE_URL}/products/${id}`, requestOptions)).json()
+        if(!response) throw new ApiError('No Data available', 404, false)
+        return response
+    }
+
+    async postOrder(order = null){
+        if (!order) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader('POST', order)
+        
+        const response = await (await fetch(`${BASE_URL}/orders`, requestOptions)).json()
+        if (!response) throw new ApiError('Post Method Not Working', 504, false)
+        return response
+    }
+
+    async createPaymentMethod(body){
+        if(!body) throw new Error('Bad usage')
+        const requestOptions = this.loadHeader('POST', body)
+        const response = await (await fetch(`${BASE_URL}/paymentMethod`,  requestOptions)).json()
+        if(!response) throw new ApiError('Post Method Not Working', 504, false)
+        return response
+    }
+
+    async createPaymentIntent(body){
+        if(!body) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader('POST', body)
+        const response = await (await fetch(`${BASE_URL}/paymentIntent`,  requestOptions)).json()
+        if (!response) throw new ApiError('Post Method Not Working', 504, false)
+        return response
+    }
+
+    async confirmPaymentIntent(body){
+        if(!body) throw new Error('Bad Usage')
+        const requestOptions = this.loadHeader('POST', body)
+        const response = await (await fetch(`${BASE_URL}/confirmPayment`,  requestOptions)).json()
+        if (!response) throw new ApiError('Post Method Not Working', 504, false)
+        return response
+    }
 }
 
 export default Driiink_API
