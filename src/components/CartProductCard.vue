@@ -39,7 +39,7 @@ export default{
     },
     methods: {
       priceFormatter(price) {
-          return (price/100).toFixed(2) + " €"
+          return `${(price/100).toFixed(2)} €`
       },
       addToCart(){
         this.cart = []

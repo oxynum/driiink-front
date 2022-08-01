@@ -64,13 +64,7 @@ class Driiink_API {
     async getBarInfoByID(id = null){
         if (!id) throw new Error('Bad Usage')
         const requestOptions = this.loadHeader()
-
         const response = await (await fetch(`${BASE_URL}/bars/${id}`, requestOptions)).json()
-        // const response = await Promise.all([fetch(`${BASE_URL}/bars/${id}`, requestOptions)])
-        //     .then(async (resp) => {
-        //         const data = resp.json()
-        //         return data
-        //     })
         if(!response) throw new ApiError('No Data available', 404, false)
         return response 
     }
@@ -78,7 +72,6 @@ class Driiink_API {
     async getMenusById(id = null){
         if (!id) throw new Error('Bad Usage')
         const requestOptions = this.loadHeader()
-
         const response = await (await fetch(`${BASE_URL}/bars/${id}`, requestOptions)).json()
         if(!response.menu) throw new ApiError('No Data available', 404, false)
         return response.menu
@@ -87,7 +80,6 @@ class Driiink_API {
     async getProductOfMenu(id = null){
         if (!id) throw new Error('Bad Usage')
         const requestOptions = this.loadHeader()
-        
         const response = await (await fetch(`${BASE_URL}/menus/${id}`, requestOptions)).json()
         if(!response) throw new ApiError('No Data available', 404, false)
         return response 
@@ -96,7 +88,6 @@ class Driiink_API {
     async getProduct(id = null){
         if (!id) throw new Error('Bad Usage')
         const requestOptions = this.loadHeader()
-
         const response = await (await fetch(`${BASE_URL}/products/${id}`, requestOptions)).json()
         if(!response) throw new ApiError('No Data available', 404, false)
         return response

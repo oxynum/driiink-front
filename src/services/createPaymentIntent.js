@@ -8,7 +8,7 @@ export const createPaymentIntent = async (amount) => {
 
     try {
       const driiink_api = new Driiink_API();
-      const response = driiink_api.createPaymentIntent(raw)
+      const response = await driiink_api.createPaymentIntent(raw)
       return response
     } catch (error) {
       throw new AppError('Request Api Error', error)

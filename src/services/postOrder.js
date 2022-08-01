@@ -21,7 +21,7 @@ export const postOrder = async (order) => {
 
     try {
         const driiink_api = new Driiink_API();
-        const response = driiink_api.postOrder(raw)
+        const response = await driiink_api.postOrder(raw)
         return response
     } catch (error) {
         throw new AppError('Request Api Error', error)

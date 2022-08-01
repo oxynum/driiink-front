@@ -40,7 +40,7 @@ export default {
       priceFormatter: function(price) {
           return (price/100).toFixed(2) + " €"
       },
-      addToCart: function(){
+      addToCart(){
         this.cart = []
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))

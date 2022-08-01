@@ -11,7 +11,7 @@ export const createPaymentMethod = async (ccn, exp_month, exp_year, cvc) => {
 
   try {
     const driiink_api = new Driiink_API()
-    const response = driiink_api.createPaymentMethod(card)
+    const response = await driiink_api.createPaymentMethod(card)
     return response
   } catch (error) { 
     throw new AppError('Request Api Error')
