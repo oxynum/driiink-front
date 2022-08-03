@@ -4,20 +4,20 @@
         <div class="form-card">
             <div class="form-card-top">
                 <label for="ccn">Numéro de carte</label>
-                <input type="text" name="ccn" maxlength="16" placeholder="4978175934555235" id="ccn" value="4242424242424242">
+                <input type="text" name="ccn" maxlength="16" placeholder="4242424242424242" id="ccn" @input="event => ccn = event.target.value">
             </div>
             <div class="form-card-bottom">
                 <div class="form-card-bottom-exp">
                     <label for="exp">Date d'expiration</label>
                     <div class="form-card-bottom-exp-input">
-                        <input type="text" placeholder="MM" maxlength="2" id="expMonth" value="09">
+                        <input type="text" placeholder="MM" maxlength="2" id="expMonth" @input="event => exp_month = event.target.value">
                         <p>/</p>
-                        <input type="text" placeholder="YYYY" maxlength="4" id="expYear" value="2030">
+                        <input type="text" placeholder="YYYY" maxlength="4" id="expYear" @input="event => exp_year = event.target.value">
                     </div>
                 </div>
                 <div class="form-card-bottom-cvc">
                     <label for="cvc">CVC</label>
-                    <input type="text" placeholder="309" maxlength="3" id="cvc" value="309">
+                    <input type="text" placeholder="309" maxlength="3" id="cvc" @input="event => cvc = event.target.value">
                 </div>
             </div>
         </div>
@@ -60,13 +60,7 @@ export default{
     },
     methods: {
         async createCard (){
-            let ccn = document.getElementById("ccn").value
-            let expMonth = document.getElementById("expMonth").value
-            let expYear = document.getElementById("expYear").value
-            let cvc = document.getElementById("cvc").value
-            
-            this.card = await createPaymentMethod(ccn, expMonth, expYear, cvc)
-            console.log(this.card)
+            this.card = await createPaymentMethod(this.ccn, this.exp_month, this.exp_year, this.cvc)
         },
         async makePayment(){
             this.$emit('loader', true)

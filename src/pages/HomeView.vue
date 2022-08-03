@@ -17,9 +17,9 @@ import ScreenLoader from "@/components/ScreenLoader.vue";
 import { getBarInfo } from "@/services/getBarInfo";
 import { getMenu } from '@/services/getMenu';
 import { getMenuData } from '@/services/getMenuData';
-import { activeMenu } from '@/utils/activeMenu';
 import { parseCategories } from '@/utils/parseCategories';
 import { driiink_api_response_parser } from '@/utils/parser';
+import { activeMenu } from '@/utils/activeMenu';
 
 export default {
   name: "HomeView",
@@ -67,14 +67,14 @@ export default {
   async beforeMount(){
     const barID = this.$route.params.id
 
-    let barInfo = await getBarInfo(barID)
-    this.name = barInfo.name
-    this.address = barInfo.address
+    const { adress, name } = await getBarInfo(barID)
+    this.name = name
+    this.address = adress
     
-    let barMenus = await getMenu(barID)
-    let temp = await activeMenu(barMenus)
+    const barMenus = await getMenu(barID)
+    const currentMenu = await activeMenu(barMenus)
 
-    let menu = await getMenuData(temp.id)
+    const menu = await getMenuData(currentMenu.id)
     this.categories = await parseCategories(menu.products)
 
     this.products = await driiink_api_response_parser(this.categories, menu.products)

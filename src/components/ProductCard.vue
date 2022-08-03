@@ -11,7 +11,7 @@
                 <div class="card-text-price">
                     <span>{{ priceFormatter(productInfo.price) }}</span>
                     <div class="card-text-price-btn">
-                        <button @click="addToCart($event)">+</button>
+                        <button @click.prevent="addToCart">+</button>
                     </div>
                 </div>
             </div>
@@ -40,8 +40,7 @@ export default {
       priceFormatter: function(price) {
           return (price/100).toFixed(2) + " €"
       },
-      addToCart: function(event){
-        event.preventDefault()
+      addToCart(){
         this.cart = []
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))

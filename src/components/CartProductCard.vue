@@ -23,6 +23,7 @@
 </template>
 
 <script>
+
 export default{
     name: 'CartProductCard',
     props: {
@@ -37,10 +38,10 @@ export default{
         }
     },
     methods: {
-      priceFormatter: function(price) {
-          return (price/100).toFixed(2) + " €"
+      priceFormatter(price) {
+          return `${(price/100).toFixed(2)} €`
       },
-      addToCart: function(){
+      addToCart(){
         this.cart = []
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
@@ -50,7 +51,7 @@ export default{
         this.counter++
         this.$emit('checkCart', true)
       },
-      removeFromCart: function(){
+      removeFromCart(){
         this.cart = this.removeOneItem(this.product)
         sessionStorage.setItem('cart', JSON.stringify(this.cart))
         this.counter--
@@ -79,6 +80,8 @@ export default{
         if(JSON.parse(sessionStorage.getItem('cart'))){
           this.cart = JSON.parse(sessionStorage.getItem('cart'))
         }
+
+        
     }
 }
 </script>

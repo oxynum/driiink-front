@@ -28,7 +28,6 @@ export default {
     if(JSON.parse(sessionStorage.getItem('cart'))){
         this.cart = JSON.parse(sessionStorage.getItem('cart'))
     }
-
   }
 }
 
