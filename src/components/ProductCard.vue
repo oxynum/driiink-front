@@ -9,9 +9,9 @@
                 <h4>{{ productInfo.name }}</h4>
                 <p>{{ productInfo.description }}</p>
                 <div class="card-text-price">
-                    <span>{{ priceFormatter(productInfo.price) }}</span>
+                    <span>{{ product.priceFormatter(productInfo.price) }}</span>
                     <div class="card-text-price-btn">
-                        <button @click.prevent="addToCart">+</button>
+                        <button @click.prevent="this.cart.add()">+</button>
                     </div>
                 </div>
             </div>
@@ -20,26 +20,24 @@
 </template>
 
 <script>
+import { useCartStore } from '@/store/cart'
+import { useProductStore } from '@/store/products'
 
 export default {
   name: "ProductCard",
-  data(){
+  setup(){
+    const cart = useCartStore()
+    const product = useProductStore()
+
     return {
-        cart : [],
+        cart,
+        product
     }
   },
   props: {
     productInfo: Object,
   },
-  beforeMount(){
-    if(JSON.parse(sessionStorage.getItem('cart'))){
-        this.cart = JSON.parse(sessionStorage.getItem('cart'))
-    }
-  },
   methods: {
-      priceFormatter: function(price) {
-          return (price/100).toFixed(2) + " €"
-      },
       addToCart(){
         this.cart = []
         if(JSON.parse(sessionStorage.getItem('cart'))){

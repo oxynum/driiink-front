@@ -14,12 +14,12 @@ import CategoryMenu from "@/components/CategoryMenu";
 import GoodDeal from "@/components/GoodDeal";
 import ProductList from "@/components/ProductList";
 import ScreenLoader from "@/components/ScreenLoader.vue";
-import { getBarInfo } from "@/services/getBarInfo";
-import { getMenu } from '@/services/getMenu';
 import { getMenuData } from '@/services/getMenuData';
 import { parseCategories } from '@/utils/parseCategories';
 import { driiink_api_response_parser } from '@/utils/parser';
 import { activeMenu } from '@/utils/activeMenu';
+import { useBarStore } from "@/store/bar";
+import { useMenuStore } from "@/store/menu";
 
 export default {
   name: "HomeView",
@@ -64,15 +64,24 @@ export default {
       counter: 0,
     }
   },
+  setup(){
+    const bar = useBarStore()
+    const menus = useMenuStore()
+
+    return {
+      bar,
+      menus
+    }
+  },
   async beforeMount(){
     const barID = this.$route.params.id
 
-    const { adress, name } = await getBarInfo(barID)
-    this.name = name
-    this.address = adress
+    await this.bar.fetchData(barID)
+    this.name = this.bar.contents.name
+    this.address = this.bar.contents.adress
     
-    const barMenus = await getMenu(barID)
-    const currentMenu = await activeMenu(barMenus)
+    await this.menus.fetchAllMenus(barID)
+    const currentMenu = await activeMenu(this.menus.contents)
 
     const menu = await getMenuData(currentMenu.id)
     this.categories = await parseCategories(menu.products)

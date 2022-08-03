@@ -19,14 +19,14 @@ export default {
         CartProductList,
         CartFooter
     },
-    emits: ["checkCart"],
-    data() {
-      return {
-        cart: [],
-        time: 0,
-        price: 0,
-        counter: 0
-      }
+  emits: ["checkCart"],
+  data() {
+    return {
+      cart: [],
+      time: 0,
+      price: 0,
+      counter: 0
+    }
   },
   beforeMount(){      
       if(JSON.parse(sessionStorage.getItem('cart'))){
