@@ -14,10 +14,9 @@ import CategoryMenu from "@/components/CategoryMenu";
 import GoodDeal from "@/components/GoodDeal";
 import ProductList from "@/components/ProductList";
 import ScreenLoader from "@/components/ScreenLoader.vue";
-import { getMenuData } from '@/services/getMenuData';
+//import { getMenuInfo } from '@/services/getMenuInfo';
 import { parseCategories } from '@/utils/parseCategories';
 import { driiink_api_response_parser } from '@/utils/parser';
-import { activeMenu } from '@/utils/activeMenu';
 import { useBarStore } from "@/store/bar";
 import { useMenuStore } from "@/store/menu";
 
@@ -81,12 +80,11 @@ export default {
     this.address = this.bar.contents.adress
     
     await this.menus.fetchAllMenus(barID)
-    const currentMenu = await activeMenu(this.menus.contents)
 
-    const menu = await getMenuData(currentMenu.id)
-    this.categories = await parseCategories(menu.products)
+    await this.menus.getActiveMenu()
+    this.categories = await parseCategories(this.menus.contents.products)
 
-    this.products = await driiink_api_response_parser(this.categories, menu.products)
+    this.products = await driiink_api_response_parser(this.categories, this.menus.contents.products)
 
     if(JSON.parse(sessionStorage.getItem('cart'))){
           this.counter = JSON.parse(sessionStorage.getItem('cart')).length

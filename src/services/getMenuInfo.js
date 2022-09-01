@@ -1,7 +1,7 @@
 import AppError from "@/entity/AppError";
 import Driiink_API from "@/entity/driiink_api";
 
-export const getMenuData = async (menuID) => {
+export const getMenuInfo = async (menuID) => {
     try {
       const driiink_api = new Driiink_API();
       const data = await driiink_api.getProductOfMenu(menuID)
